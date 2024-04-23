@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import authService from '../services/authService';
 
-const LoginScreen = ({ navigation }) => {
+const LoginComponent = ({ onSignIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = async () => {
-    try {
-      const userData = {
-        email,
-        password,
-      };
-
-      const response = await authService.signIn(userData);
-      console.log(response); // Handle success or error response
-
-      // Navigate to the home screen upon successful login
-      // Replace 'HomeScreen' with the name of your home screen
-      navigation.replace('HomeScreen');
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSignIn = () => {
+    // Implement your sign in logic here
+    onSignIn(email, password);
   };
 
   return (
@@ -76,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default LoginComponent;

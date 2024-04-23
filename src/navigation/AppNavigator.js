@@ -6,6 +6,8 @@ import SplashScreen from '../screens/Onboarding/SplashScreen';
 import OnboardingScreen from '../screens/Onboarding/OnboardingScreen';
 import RoleSelectionScreen from '../screens/Auth/RoleSelectionScreen';
 import SignupScreen from '../screens/Auth/SignupScreen';
+import LoginScreen from '../screens/Auth/LoginScreen';
+import AuthScreen from '../screens/Auth/AuthScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +18,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       <Stack.Screen name="SelectRole" component={RoleSelectionScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   );
 };
