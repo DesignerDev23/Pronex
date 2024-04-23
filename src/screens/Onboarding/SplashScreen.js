@@ -12,10 +12,10 @@ const SplashScreen = ({ navigation }) => {
   return (
     <LinearGradient colors={['#00B4FE', '#00B4FE']} style={styles.container}>
       <View style={styles.middleContainer}>
-        <Image source={require('../../assets/images/splash.png')} style={styles.largeLogo} />
+        <Image source={require('../../../assets/images/splash.png')} style={styles.largeLogo} />
       </View>
       <View style={styles.bottomContainer}>
-        <Image source={require('../../assets/images/bt.png')} style={styles.smallLogo} />
+        <Image source={require('../../../assets/images/bt.png')} style={styles.smallLogo} />
         <Text style={styles.text}>Powered by Bigtech Agency LTD</Text>
       </View>
     </LinearGradient>
