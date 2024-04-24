@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, ImageBackground } from 'react-native';
 import * as Font from 'expo-font';
 
 Font.loadAsync({
@@ -14,7 +14,10 @@ const RoleSelectionScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../../../assets/images/bg.png')} // Replace 'bg.png' with the actual image file path
+      style={styles.container}
+    >
       {/* Set the background color for the status bar */}
       <StatusBar backgroundColor="#00B4FE" />
 
@@ -26,21 +29,6 @@ const RoleSelectionScreen = ({ navigation }) => {
 
       {/* Buttons Container */}
       <View style={styles.buttonsContainer}>
-        {/* Login and Register Container */}
-        <View style={styles.loginRegisterContainer}>
-          <TouchableOpacity
-            style={[styles.loginButton, styles.activeButton]}
-            onPress={() => console.log('Login')}
-          >
-            <Text style={[styles.buttonText, styles.activeButtonText]}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.registerButton, styles.inactiveButton]}
-            onPress={() => console.log('Register')}
-          >
-            <Text style={[styles.buttonText, styles.inactiveButtonText]}>Register</Text>
-          </TouchableOpacity>
-        </View>
 
         {/* Patient and Doctor Buttons */}
         <View style={styles.roleButtonsContainer}>
@@ -66,14 +54,15 @@ const RoleSelectionScreen = ({ navigation }) => {
           <Text style={styles.continueButtonText}>Continue</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00B4FE', // Set background color for the screen
+    resizeMode: "cover", // Cover the entire container
+    backgroundColor: 'rgba(0, 180, 254, 0.99)', // Set background color with some transparency
   },
   titleContainer: {
     marginTop: -20,
@@ -86,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1, // Fill the remaining space
     borderTopLeftRadius: 30, // Apply border radius to top corners
     borderTopRightRadius: 30,
-    backgroundColor: '#fff', // Set white background color
+    backgroundColor: '#fff', // Set white background color with some opacity
     paddingHorizontal: 20, // Add padding for better spacing
     paddingTop: 20, // Add paddingTop for better spacing
     justifyContent: 'center', // Center buttons vertically
@@ -104,49 +93,27 @@ const styles = StyleSheet.create({
     color: '#fff', // Set text color to white
     textAlign: 'left', // Align text to the left
   },
-  loginRegisterContainer: {
-    flexDirection: 'row',
-    marginBottom: 20,
-    marginTop: -190,
-    paddingHorizontal: 5,
-    borderRadius: 19,
-    paddingTop: 5,
-    paddingBottom: 5,
-    backgroundColor: '#00B4FE',
-  },
-  loginButton: {
-    flex: 1,
-    paddingVertical: 14,
-    marginRight: 10,
-    borderRadius: 15,
-  },
-  registerButton: {
-    flex: 1,
-    paddingVertical: 15,
-    marginLeft: 10,
-    borderRadius: 10,
-  },
+
   roleButtonsContainer: {
     flexDirection: 'column',
     marginBottom: 20,
+    marginTop: '-45%',
     justifyContent: 'space-between', // Space evenly between buttons
     width: '100%', // Occupy the full width
-    color: '#00B4FE', // Change TextColor to color
   },
   roleButton: {
-    flex: 1,
-    paddingVertical: 27,
-    borderRadius: 10,
-    borderColor: '#00B4FE',
+    paddingVertical: 20,
+    borderRadius: 16,
     borderWidth: 1,
+    borderColor: '#00B4FE',
     marginBottom: 10,
-    color: '#000', // Change text color to black
+    backgroundColor: '#fff', // Set white background color
   },
 
   continueButton: {
     backgroundColor: '#00B4FE',
     paddingVertical: 15,
-    borderRadius: 10,
+    borderRadius: 15,
     marginBottom: 20,
     alignSelf: 'stretch', // Stretch button to fill the width
   },
@@ -155,19 +122,6 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins-regular',
     textAlign: 'center',
     fontWeight: 'bold',
-  },
-  activeButton: {
-    backgroundColor: '#fff',
-  },
-  inactiveButton: {
-    backgroundColor: 'transparent',
-    borderColor: '#fff',
-  },
-  activeButtonText: {
-    color: '#00B4FE',
-  },
-  inactiveButtonText: {
-    color: '#fff',
   },
 
   continueButtonText: {
