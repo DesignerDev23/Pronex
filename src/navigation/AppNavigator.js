@@ -8,6 +8,7 @@ import RoleSelectionScreen from '../screens/Auth/RoleSelectionScreen';
 import SignupScreen from '../screens/Auth/SignupScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import AuthScreen from '../screens/Auth/AuthScreen';
+import HomeScreen from '../HomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const AppNavigator = () => {
       <Stack.Screen name="SelectRole" component={RoleSelectionScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
     </Stack.Navigator>
   );
 };
