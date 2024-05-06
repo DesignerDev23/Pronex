@@ -11,6 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import * as Font from 'expo-font';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const {width, height} = Dimensions.get('window');
@@ -110,7 +111,8 @@ const OnboardingScreen = ({navigation}) => {
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            marginTop: 20,
+            marginTop: 40,
+            marginRight: 220,
           }}>
           {/* Render indicator */}
           {slides.map((_, index) => (
@@ -141,7 +143,7 @@ const OnboardingScreen = ({navigation}) => {
             </View>
           ) : (
             <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 activeOpacity={0.8}
                 style={[
                   styles.btn,
@@ -160,21 +162,12 @@ const OnboardingScreen = ({navigation}) => {
                   }}>
                   SKIP
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
+
               <View style={{width: 15}} />
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={goToNextSlide}
-                style={styles.btn}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: 15,
-                    color: COLORS.primary,
-                  }}>
-                  NEXT
-                </Text>
-              </TouchableOpacity>
+              <TouchableOpacity onPress={goToNextSlide} style={styles.circularButton}>
+        <MaterialIcons name="arrow-forward" size={24} color="#fff" />
+      </TouchableOpacity>
             </View>
           )}
         </View>
@@ -233,13 +226,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     marginHorizontal: 3,
     borderRadius: 2,
-    marginTop: 30,
+    marginTop: 70,
   },
   btn: {
     flex: 1,
     height: 50,
     borderRadius: 5,
     backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circularButton: {
+    width: 60,
+    height: 60,
+    marginLeft: 230,
+    marginTop: -80,
+    borderRadius: 35,
+    backgroundColor: '#00B4FE',
     justifyContent: 'center',
     alignItems: 'center',
   },

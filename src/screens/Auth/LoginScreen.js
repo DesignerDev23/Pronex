@@ -10,23 +10,30 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
+
   const handleSignIn = async () => {
     try {
-      const userData = {
-        email,
-        password,
-      };
-
+      const userData = { email, password };
       const response = await authService.signIn(userData);
-      console.log(response); // Handle success or error response
-
-      // Navigate to the home screen and pass user data as route parameters
-      navigation.replace('HomeScreen', { userData: response });
-
+      const { token } = response; // Extract the token from the response
+      console.log('Token:', token);
+  
+      // Fetch user data using the obtained token
+      const userDataResponse = await authService.getUserData(token);
+      console.log('User Data:', userDataResponse);
+  
+      // Store the token and user data in the session
+      authService.storeToken(token);
+      authService.storeUserData(userDataResponse);
+  
+      // Navigate to the home screen with user data
+      navigation.replace('HomeScreen', { userData: userDataResponse });
     } catch (error) {
       console.error(error);
     }
   };
+  
+
 
   const authenticateWithFingerprint = async () => {
     try {
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 10,
     left: 20,
-    backgroundColor: 'rgba(0, 255, 254, 0.19)',
+    // backgroundColor: 'rgba(0, 255, 254, 0.19)',
     borderRadius: 10,
     padding: 4,
     zIndex: 1,

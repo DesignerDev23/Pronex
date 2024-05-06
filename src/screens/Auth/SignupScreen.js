@@ -86,12 +86,18 @@ const SignupScreen = ({ navigation, route }) => {
               secureTextEntry
             />
           </View>
-          <Text style={styles.termsText}>By creating an account you agree to our Term of Use and Privacy Policy.</Text>
+          <Text style={styles.termsText}>
+  By creating an account you agree to our{" "}
+  <Text style={{ color: '#00B4FE' }}>Term of Use</Text>{" "}
+  and{" "}
+  <Text style={{ color: '#00B4FE' }}>Privacy Policy</Text>.
+</Text>
+
           <TouchableOpacity style={styles.signupButton} onPress={handleSignup}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginText}>Already have an account? Login</Text>
+          <Text style={styles.loginText}>Already have an account? <Text style={{ color: '#00B4FE' }}>Login</Text></Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -158,7 +164,7 @@ const styles = StyleSheet.create({
   termsText: {
     fontSize: 12,
     fontFamily: 'poppins-regular',
-    color: '#00B4FE',
+    // color: '#00B4FE',
     marginBottom: 10,
     textAlign: 'center',
   },
@@ -177,7 +183,7 @@ const styles = StyleSheet.create({
   loginText: {
     fontSize: 13,
     fontFamily: 'poppins-regular',
-    color: '#00B4FE',
+    // color: '#00B4FE',
     marginTop: 10,
     textAlign: 'center',
   },
