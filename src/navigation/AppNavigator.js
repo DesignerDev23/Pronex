@@ -8,9 +8,14 @@ import RoleSelectionScreen from '../screens/Auth/RoleSelectionScreen';
 import SignupScreen from '../screens/Auth/SignupScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import AuthScreen from '../screens/Auth/AuthScreen';
-import HomeScreen from '../HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 import ForgotPassword from '../screens/Auth/ForgotPassword';
 import ResetPassword from '../screens/Auth/ResetPassword';
+import CustomBottomTabBar from '../components/CustomBottomTabBar'; // Import the CustomBottomTabBar component
+import DoctorsScreen from '../screens/DoctorsScreen';
+import PharmacyScreen from '../screens/PharmacyScreen';
+import MessagesScreen from '../screens/MessagesScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +30,12 @@ const AppNavigator = () => {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      {/* Add the screens for the tabs */}
+      {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+      <Stack.Screen name="Doctors" component={DoctorsScreen} />
+      <Stack.Screen name="Pharmacy" component={PharmacyScreen} />
+      <Stack.Screen name="Messages" component={MessagesScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 };

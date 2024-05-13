@@ -1,27 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; // Import MaterialCommunityIcons from expo/vector-icons
 import { AntDesign } from '@expo/vector-icons'; // Import AntDesign from expo/vector-icons
 import authService from '../services/authService';
 import * as LocalAuthentication from 'expo-local-authentication';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
+  useEffect(() => {
+    checkLoggedInStatus();
+  }, []);
+
+  const checkLoggedInStatus = async () => {
+    try {
+      // Check if a token exists in AsyncStorage
+      const token = await authService.getToken();
+      if (token) {
+        // Fetch user data using the stored token
+        const userData = await authService.getUserData(token);
+        // Navigate to the home screen with user data
+
+        
+        navigation.replace('HomeScreen', { userData });
+      }
+    } catch (error) {
+      console.error('Error checking login status:', error);
+    }
+  };
 
   const handleSignIn = async () => {
     try {
       const userData = { email, password };
       const response = await authService.signIn(userData);
       const { token } = response; // Extract the token from the response
-      console.log('Token:', token);
   
       // Fetch user data using the obtained token
       const userDataResponse = await authService.getUserData(token);
-      console.log('User Data:', userDataResponse);
-  
+      
       // Store the token and user data in the session
       authService.storeToken(token);
       authService.storeUserData(userDataResponse);
@@ -32,8 +51,6 @@ const LoginScreen = ({ navigation }) => {
       console.error(error);
     }
   };
-  
-
 
   const authenticateWithFingerprint = async () => {
     try {
