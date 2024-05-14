@@ -72,7 +72,7 @@ const HomeScreen = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
       <HowCanWeHelpYou />
-      <CustomBottomTabBar navigation={navigation} />
+      <CustomBottomTabBar navigation={navigation} route={route} userDataResponse={userData} />
     </View>
   );
 };

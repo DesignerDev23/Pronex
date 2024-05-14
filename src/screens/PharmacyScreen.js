@@ -6,7 +6,11 @@ const PharmacyScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Pharmacy Screen</Text>
+
+      
     </View>
+
+    
   );
 };
 

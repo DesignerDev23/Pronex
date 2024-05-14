@@ -47,6 +47,8 @@ const LoginScreen = ({ navigation }) => {
   
       // Navigate to the home screen with user data
       navigation.replace('HomeScreen', { userData: userDataResponse });
+      
+
     } catch (error) {
       console.error(error);
     }

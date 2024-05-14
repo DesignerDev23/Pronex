@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import HomeScreen from '../screens/HomeScreen';
 
-const CustomBottomTabBar = ({ navigation }) => {
+const CustomBottomTabBar = ({ navigation, route, userDataResponse }) => {
   const navigateToScreen = (screenName) => {
-    navigation.navigate(screenName);
+    navigation.navigate(screenName, { userDataResponse });
   };
 
   return (
@@ -12,19 +13,19 @@ const CustomBottomTabBar = ({ navigation }) => {
         <Image source={require('../../assets/icons/home.png')} style={styles.icon} />
         <Text style={styles.tabText}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateToScreen('DoctorsScreen')} style={styles.tab}>
+      <TouchableOpacity onPress={() => navigateToScreen('Doctors')} style={styles.tab}>
         <Image source={require('../../assets/icons/doctor.png')} style={styles.icon} />
         <Text style={styles.tabText}>Doctors</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateToScreen('PharmacyScreen')} style={styles.tab}>
+      <TouchableOpacity onPress={() => navigateToScreen('Pharmacy')} style={styles.tab}>
         <Image source={require('../../assets/icons/pharmacy.png')} style={styles.icon} />
         <Text style={styles.tabText}>Pharmacy</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateToScreen('MessagesScreen')} style={styles.tab}>
+      <TouchableOpacity onPress={() => navigateToScreen('Messages')} style={styles.tab}>
         <Image source={require('../../assets/icons/messages.png')} style={styles.icon} />
         <Text style={styles.tabText}>Messages</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigateToScreen('ProfileScreen')} style={styles.tab}>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile', { userData: userDataResponse })} style={styles.tab}>
         <Image source={require('../../assets/icons/profile.png')} style={styles.icon} />
         <Text style={styles.tabText}>Profile</Text>
       </TouchableOpacity>
