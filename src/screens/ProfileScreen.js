@@ -22,88 +22,81 @@ const ProfileScreen = ({ route, navigation }) => {
           <Text style={styles.userName}>{userData.data.firstName} {userData.data.lastName}</Text>
         )}
       </View>
-      <View contentContainerStyle={styles.infoContainer}>
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-    {/* Manually define item containers */}
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 1</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-      </View>
-      <Text style={styles.title}>Item 2</Text>
-      <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-    </TouchableOpacity>
-    {/* Add more item containers as needed */}
-  </ScrollView>
+      <View style={styles.whiteContainer}>
+        <ScrollView contentContainerStyle={styles.infoContainer} showsVerticalScrollIndicator={false}>
+          {/* Manually define item containers */}
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <View style={styles.iconContainer}>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </View>
+            <Text style={styles.title}>Item 1</Text>
+            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+          </TouchableOpacity>
+          {/* Add more item containers as needed */}
+        </ScrollView>
       </View>
       <View style={styles.fixedBottom}>
         <CustomBottomTabBar navigation={navigation} route={route} userDataResponse={userData} />
@@ -147,28 +140,20 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 20,
     marginTop: 10,
+    marginBottom: 20,
     fontFamily: 'Montserrat',
+  },
+  whiteContainer: {
+    flex: 1,
+    borderTopLeftRadius: 30, // Border radius from the top-left corner
+    borderTopRightRadius: 30, // Border radius from the top-right corner
+    backgroundColor: '#FFFFFF', // White background color
+    paddingHorizontal: 20, // Add horizontal padding as needed
+    paddingTop: 20, // Add top padding as needed
   },
   infoContainer: {
     flexGrow: 1,
-    backgroundColor: '#FFF',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    marginTop: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginBottom: -0,
-    height: '100%',
-  },
-  scrollContainer: {
-    backgroundColor: '#FFF',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    marginTop: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginBottom: -0,
-    minHeight: '100%',
+    paddingBottom: 20, // Add bottom padding as needed
   },
   infoText: {
     fontSize: 18,
@@ -183,11 +168,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 15,
-    marginTop: '-255%',
+    marginTop: -100,
   },
   fixedBottom: {
     position: 'absolute',
-    bottom: 200,
+    bottom: 90,
     left: 0,
     right: 0,
   },
