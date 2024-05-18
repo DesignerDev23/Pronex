@@ -24,78 +24,110 @@ const ProfileScreen = ({ route, navigation }) => {
       </View>
       <View style={styles.whiteContainer}>
         <ScrollView contentContainerStyle={styles.infoContainer} showsVerticalScrollIndicator={false}>
-          {/* Manually define item containers */}
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+          {/* Group 1: Personal Details - My Orders */}
+          <View style={styles.groupContainer}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Personal Details</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Payment Methods</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Medical Records</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>My Appointments</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>My Orders</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Group 2: Saved Items - System Setting */}
+          <View style={styles.groupContainer}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Saved Items</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Help and Support</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>System Setting</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Group 3: Terms & Condition - Feedback */}
+          <View style={styles.groupContainer}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Terms & Condition</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Privacy Policy</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>About Pronex Health</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+              <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              </View>
+              <Text style={styles.title}>Feedback</Text>
+              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Log Out */}
+          <TouchableOpacity style={[styles.itemContainer, styles.logoutContainer]} onPress={() => navigation.navigate('ScreenName')}>
             <View style={styles.iconContainer}>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </View>
-            <Text style={styles.title}>Item 1</Text>
+            <Text style={styles.title}>Log Out</Text>
             <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
-            <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-            </View>
-            <Text style={styles.title}>Item 1</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
-          </TouchableOpacity>
-          {/* Add more item containers as needed */}
         </ScrollView>
       </View>
       <View style={styles.fixedBottom}>
@@ -150,10 +182,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF', // White background color
     paddingHorizontal: 20, // Add horizontal padding as needed
     paddingTop: 20, // Add top padding as needed
+    minHeight: '80%', // Define the height to 80% of the screen
   },
   infoContainer: {
     flexGrow: 1,
-    paddingBottom: 20, // Add bottom padding as needed
+    paddingBottom: 100, // Add bottom padding as needed
+    minHeight: '120%',
   },
   infoText: {
     fontSize: 18,
@@ -168,15 +202,14 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 15,
-    marginTop: -100,
+    marginTop: '-215%',
   },
   fixedBottom: {
     position: 'absolute',
-    bottom: 90,
+    bottom: 30,
     left: 0,
     right: 0,
   },
-  
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -197,12 +230,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 180, 254, 0.1)',
     borderRadius: 10, // Adjust the border radius as needed
   },
-  
   title: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
     flex: 1,
+    fontFamily: 'Montserrat-SemiBold',
   },
+  groupContainer: {
+    marginBottom: 30, // Adjust the margin bottom as needed
+  },
+  logoutContainer: {
+    marginBottom: 50, // Adjust the margin bottom as needed for the log out button
+  }
 });
 
 export default ProfileScreen;

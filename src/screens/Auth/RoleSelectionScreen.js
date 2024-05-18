@@ -5,6 +5,8 @@ import * as Font from 'expo-font';
 Font.loadAsync({
   'poppins-regular': require('../../../assets/fonts/Poppins-Regular.ttf'), // Update the path accordingly
   'Montserrat': require('../../../assets/fonts/Montserrat-Bold.ttf'), // Update the path accordingly
+  'Montserrat-Regular': require('../../../assets/fonts/Montserrat-Regular.ttf'), // Update the path accordingly
+  'Montserrat-SemiBold': require('../../../assets/fonts/Montserrat-SemiBold.ttf'), // Update the path accordingly
 });
 
 const RoleSelectionScreen = ({ navigation }) => {
