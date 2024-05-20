@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, StatusBar, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Octicons } from '@expo/vector-icons'; // Import Octicons
 import CustomBottomTabBar from '../components/CustomBottomTabBar';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons, FontAwesome5, MaterialIcons,Ionicons, AntDesign} from '@expo/vector-icons'; 
 
 const ProfileScreen = ({ route, navigation }) => {
   const { userData } = route.params;
@@ -28,35 +28,39 @@ const ProfileScreen = ({ route, navigation }) => {
           <View style={styles.groupContainer}>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <FontAwesome5 name="user-alt" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Personal Details</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialIcons name="payment" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Payment Methods</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
+            
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <FontAwesome5 name="clipboard-list" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Medical Records</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <FontAwesome5 name="calendar-week" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>My Appointments</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialCommunityIcons name="cart" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>My Orders</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
@@ -67,21 +71,21 @@ const ProfileScreen = ({ route, navigation }) => {
           <View style={styles.groupContainer}>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialCommunityIcons name="bookmark" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Saved Items</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialCommunityIcons name="face-agent" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Help and Support</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <Ionicons name="settings" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>System Setting</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
@@ -92,28 +96,28 @@ const ProfileScreen = ({ route, navigation }) => {
           <View style={styles.groupContainer}>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialIcons name="bookmark" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Terms & Condition</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialIcons name="privacy-tip" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Privacy Policy</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialIcons name="medical-information" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>About Pronex Health</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>
-                <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+                <MaterialIcons name="feedback" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Feedback</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
@@ -123,10 +127,10 @@ const ProfileScreen = ({ route, navigation }) => {
           {/* Log Out */}
           <TouchableOpacity style={[styles.itemContainer, styles.logoutContainer]} onPress={() => navigation.navigate('ScreenName')}>
             <View style={styles.iconContainer}>
-              <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+              <AntDesign name="logout" size={24} color="#C23534" />
             </View>
-            <Text style={styles.title}>Log Out</Text>
-            <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
+            <Text style={styles.logout}>Log Out</Text>
+            <MaterialCommunityIcons name="arrow-right" size={23} color="#00B4FE" />
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -233,6 +237,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     color: '#333',
+    flex: 1,
+    fontFamily: 'Montserrat-SemiBold',
+  },
+  logout: {
+    fontSize: 14,
+    color: '#C23534',
     flex: 1,
     fontFamily: 'Montserrat-SemiBold',
   },
