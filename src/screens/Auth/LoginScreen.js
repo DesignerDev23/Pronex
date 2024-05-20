@@ -5,11 +5,14 @@ import { AntDesign } from '@expo/vector-icons'; // Import AntDesign from expo/ve
 import authService from '../services/authService';
 import * as LocalAuthentication from 'expo-local-authentication';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from '../../components/Loader';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     checkLoggedInStatus();
@@ -33,6 +36,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const handleSignIn = async () => {
+    setLoading(true); // Show loader
     try {
       const userData = { email, password };
       const response = await authService.signIn(userData);
@@ -40,19 +44,22 @@ const LoginScreen = ({ navigation }) => {
   
       // Fetch user data using the obtained token
       const userDataResponse = await authService.getUserData(token);
-      
+  
       // Store the token and user data in the session
-      authService.storeToken(token);
-      authService.storeUserData(userDataResponse);
+      await authService.storeToken(token);
+      await authService.storeUserData(userDataResponse);
   
       // Navigate to the home screen with user data
       navigation.replace('HomeScreen', { userData: userDataResponse });
-      
-
     } catch (error) {
       console.error(error);
+      Alert.alert('Login Error', 'Invalid credentials. Please try again.');
+    } finally {
+      setLoading(false); // Hide loader
     }
   };
+  
+  
 
   const authenticateWithFingerprint = async () => {
     try {
@@ -74,6 +81,7 @@ const LoginScreen = ({ navigation }) => {
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
+      {loading && <Loader />}
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <MaterialIcons name="arrow-back-ios" size={20} color="#fff" style={{marginLeft: 5,}} />
         </TouchableOpacity>
@@ -138,6 +146,7 @@ const LoginScreen = ({ navigation }) => {
         </View>
       </View>
     </ImageBackground>
+    
   );
 };
 

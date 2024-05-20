@@ -3,9 +3,27 @@ import { View, Text, StyleSheet, StatusBar, Image, ScrollView, TouchableOpacity 
 import { Octicons } from '@expo/vector-icons'; // Import Octicons
 import CustomBottomTabBar from '../components/CustomBottomTabBar';
 import { MaterialCommunityIcons, FontAwesome5, MaterialIcons,Ionicons, AntDesign} from '@expo/vector-icons'; 
+import authService from '../screens/services/authService';
+
 
 const ProfileScreen = ({ route, navigation }) => {
   const { userData } = route.params;
+
+
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      // Alert.alert('Logout', 'You have been logged out successfully.');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    } catch (error) {
+      console.error('Logout error', error);
+      Alert.alert('Error', 'An error occurred while logging out.');
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -125,7 +143,7 @@ const ProfileScreen = ({ route, navigation }) => {
           </View>
 
           {/* Log Out */}
-          <TouchableOpacity style={[styles.itemContainer, styles.logoutContainer]} onPress={() => navigation.navigate('ScreenName')}>
+          <TouchableOpacity style={[styles.itemContainer, styles.logoutContainer]} onPress={handleLogout}>
             <View style={styles.iconContainer}>
               <AntDesign name="logout" size={24} color="#C23534" />
             </View>

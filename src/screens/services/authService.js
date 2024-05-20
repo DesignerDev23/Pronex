@@ -103,6 +103,35 @@ const authService = {
       throw error;
     }
   },
+  logout: async () => {
+    try {
+      const token = await AsyncStorage.getItem('authToken');
+      if (!token) {
+        throw new Error('No token found');
+      }
+  
+      const options = {
+        method: 'POST',
+        url: 'https://pronex.abdulfortech.com/api/auth/signout',
+        headers: { 
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: {}
+      };
+  
+      const response = await axios.request(options);
+      console.log('Logged out successfully:', response.data);
+  
+      await AsyncStorage.removeItem('authToken');
+      console.log('Token removed');
+    } catch (error) {
+      console.error('Logout error', error);
+      throw error;
+    }
+  },
+  
 };
 
 export default authService;
