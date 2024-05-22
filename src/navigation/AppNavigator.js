@@ -16,6 +16,8 @@ import DoctorsScreen from '../screens/DoctorsScreen';
 import PharmacyScreen from '../screens/PharmacyScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import PersonalDetailsScreen from '../screens/profile/PersonalDetailsScreen';
+import VerifyAccountScreen from '../screens/profile/VerifyAccountScreen';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,8 @@ const AppNavigator = () => {
       <Stack.Screen name="Pharmacy" component={PharmacyScreen} />
       <Stack.Screen name="Messages" component={MessagesScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="PersonalDetails" component={PersonalDetailsScreen} />
+      <Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
     </Stack.Navigator>
   );
 };

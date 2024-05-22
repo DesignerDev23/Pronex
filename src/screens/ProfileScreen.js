@@ -44,13 +44,14 @@ const ProfileScreen = ({ route, navigation }) => {
         <ScrollView contentContainerStyle={styles.infoContainer} showsVerticalScrollIndicator={false}>
           {/* Group 1: Personal Details - My Orders */}
           <View style={styles.groupContainer}>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('PersonalDetails', { userData })}>
               <View style={styles.iconContainer}>
                 <FontAwesome5 name="user-alt" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Personal Details</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
+
 
             <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
               <View style={styles.iconContainer}>

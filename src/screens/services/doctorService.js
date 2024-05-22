@@ -12,7 +12,7 @@ const doctorService = {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,
-        }
+        },
       };
       const { data } = await axios.request(options);
       return data;

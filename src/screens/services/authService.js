@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 
 const API_URL = 'https://pronex.abdulfortech.com/api/auth';
 const API_USER = 'https://pronex.abdulfortech.com/api/user';
+const API_KYC = 'https://pronex.abdulfortech.com/api/kyc/verify-account';
 
 const authService = {
   signUp: async (userData) => {
@@ -131,7 +132,37 @@ const authService = {
       throw error;
     }
   },
-  
+  verifyAccount: async (channel, contact) => {
+    try {
+      const token = await AsyncStorage.getItem('authToken');
+      if (!token) {
+        throw new Error('No token found');
+      }
+
+      console.log('Requesting verification with:', { channel, contact });
+
+      const options = {
+        method: 'GET',
+        url: API_KYC,
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        params: { channel, contact },
+      };
+
+      const { data } = await axios.request(options);
+      console.log('Verification response:', data);
+      return data;
+    } catch (error) {
+      if (error.response) {
+        console.error('Server responded with:', error.response.status, error.response.data);
+      } else {
+        console.error('Error verifying account:', error.message);
+      }
+      throw error;
+    }
+  },
 };
 
 export default authService;

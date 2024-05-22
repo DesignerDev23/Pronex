@@ -1,15 +1,26 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import doctorService from '../screens/services/doctorService'; // Adjust the path if necessary
 
-const DoctorCard = () => {
-  // Dummy data for doctors
-  const doctors = [
-    { id: 1, name: 'Dr. Musa Abdulkadir', specialization: 'Dentist' },
-    { id: 2, name: 'Dr. Fatima Aliyu', specialization: 'Pediatrician' },
-    { id: 3, name: 'Dr. Yusuf Ibrahim', specialization: 'Cardiologist' },
-    { id: 4, name: 'Dr. Aisha Mohammed', specialization: 'Dermatologist' },
-  ];
+const DoctorCard = ({ token }) => { // Assuming you are passing the token as a prop
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const data = await doctorService.fetchDoctors(token);
+        setDoctors(data.data); // Adjust to use the 'data' field from the API response
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    fetchDoctors();
+  }, [token]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.card}>
@@ -18,7 +29,7 @@ const DoctorCard = () => {
           <FontAwesome5 name="user-md" size={24} color="#fff" />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.doctorName}>{item.name}</Text>
+          <Text style={styles.doctorName}>{item.firstName} {item.lastName}</Text>
           <Text style={styles.specialization}>{item.specialization}</Text>
         </View>
       </View>
@@ -29,14 +40,20 @@ const DoctorCard = () => {
   );
 
   return (
-    <FlatList
-      data={doctors}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.flatListContainer}
-    />
+    <View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#00B4FE" />
+      ) : (
+        <FlatList
+          data={doctors}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.doctorID.toString()}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.flatListContainer}
+        />
+      )}
+    </View>
   );
 };
 
