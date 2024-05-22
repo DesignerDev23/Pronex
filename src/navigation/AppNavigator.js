@@ -18,6 +18,7 @@ import MessagesScreen from '../screens/MessagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import PersonalDetailsScreen from '../screens/profile/PersonalDetailsScreen';
 import VerifyAccountScreen from '../screens/profile/VerifyAccountScreen';
+import VerifyOtpScreen from '../screens/profile/VerifyOtpScreen';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="PersonalDetails" component={PersonalDetailsScreen} />
       <Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
+      <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
     </Stack.Navigator>
   );
 };
