@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 const API_URL = 'https://pronex.abdulfortech.com/api/auth';
 const API_USER = 'https://pronex.abdulfortech.com/api/user';
 const API_KYC = 'https://pronex.abdulfortech.com/api/kyc/verify-account';
+const API_VERIFY_OTP = 'https://pronex.abdulfortech.com/api/kyc/verify-otp';
 
 const authService = {
   signUp: async (userData) => {
@@ -159,6 +160,36 @@ const authService = {
         console.error('Server responded with:', error.response.status, error.response.data);
       } else {
         console.error('Error verifying account:', error.message);
+      }
+      throw error;
+    }
+  },
+
+  verifyOTP: async (channel, contact, otp) => {
+    try {
+      const token = await AsyncStorage.getItem('authToken');
+      if (!token) {
+        throw new Error('No token found');
+      }
+
+      const options = {
+        method: 'POST',
+        url: API_VERIFY_OTP,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: { channel, contact, otp },
+      };
+
+      const { data } = await axios.request(options);
+      return data;
+    } catch (error) {
+      if (error.response) {
+        console.error('Server responded with:', error.response.status, error.response.data);
+      } else {
+        console.error('Error verifying OTP:', error.message);
       }
       throw error;
     }

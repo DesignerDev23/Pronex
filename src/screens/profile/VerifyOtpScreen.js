@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, ImageBackground, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Loader from '../../components/Loader';
+import authService from '../services/authService';
 
-const VerifyOTPScreen = ({ navigation }) => {
-  const [otp, setOtp] = useState('');
+const VerifyOTPScreen = ({ route, navigation }) => {
+  const { userData } = route.params;
+  const { channel, contact } = route.params;
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const inputRefs = useRef([]);
 
   const handleVerifyOTP = async () => {
     setLoading(true);
+    const otpCode = otp.join('');
     try {
-      // Perform OTP verification logic here
+      const data = await authService.verifyOTP(channel, contact, otpCode);
       setLoading(false);
       // If OTP verification is successful, navigate to the next screen
-      navigation.navigate('NextScreen'); // Replace 'NextScreen' with the actual name of the screen
+      navigation.navigate('Profile', { userData: userDataResponse }); // Replace 'NextScreen' with the actual name of the screen
     } catch (error) {
       console.error('OTP verification error:', error);
       setError(error);
       setLoading(false);
       Alert.alert('Error', 'Failed to verify OTP. Please try again.');
+    }
+  };
+
+  const handleChangeText = (text, index) => {
+    const newOtp = [...otp];
+    newOtp[index] = text;
+    setOtp(newOtp);
+    
+    if (text && index < otp.length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleBackspace = (index) => {
+    if (index > 0) {
+      inputRefs.current[index - 1].focus();
     }
   };
 
@@ -35,20 +56,25 @@ const VerifyOTPScreen = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Text style={styles.heading}>Verify OTP</Text>
-          <Text style={styles.subheading}>Enter the 6-digit OTP sent to your contact</Text>
+          <Text style={styles.subheading}>We sent a code to your {contact}. Enter the code below for verification</Text>
         </View>
         <View style={styles.formContainer}>
           <View style={styles.otpContainer}>
-            {[1, 2, 3, 4, 5, 6].map((index) => (
+            {otp.map((digit, index) => (
               <TextInput
                 key={index}
+                ref={(ref) => (inputRefs.current[index] = ref)}
                 style={styles.otpInput}
                 maxLength={1}
                 keyboardType="numeric"
-                onChangeText={(text) => setOtp((prevOtp) => prevOtp + text)}
-                value={otp[index - 1] || ''}
-                autoFocus={index === 1}
-                onFocus={() => setOtp('')}
+                onChangeText={(text) => handleChangeText(text, index)}
+                onKeyPress={({ nativeEvent }) => {
+                  if (nativeEvent.key === 'Backspace' && !otp[index]) {
+                    handleBackspace(index);
+                  }
+                }}
+                value={digit}
+                autoFocus={index === 0}
               />
             ))}
           </View>
@@ -119,7 +145,7 @@ const styles = StyleSheet.create({
   },
   otpInput: {
     backgroundColor: '#fff',
-    width: '14%',
+    width: 40,
     height: 50,
     fontSize: 20,
     textAlign: 'center',

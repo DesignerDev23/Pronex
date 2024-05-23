@@ -19,9 +19,12 @@ const VerifyAccountScreen = ({ navigation }) => {
       const data = await authService.verifyAccount(channel, contact);
       setVerificationStatus(data);
       setLoading(false);
-      // Navigate to Verify OTP screen
-      navigation.navigate('VerifyOtp'); // Replace 'VerifyOTPScreen' with the actual name of the screen
-      Alert.alert('OTP Sent', `The OTP has been sent to your contact via ${channel}`);
+      Alert.alert('OTP Sent', `The OTP has been sent to your contact via ${channel}`, [
+        {
+          text: 'OK',
+          onPress: () => navigation.navigate('VerifyOtp', { channel, contact }),
+        },
+      ]);
     } catch (error) {
       console.error('Verification error:', error);
       setError(error);
@@ -29,7 +32,6 @@ const VerifyAccountScreen = ({ navigation }) => {
       Alert.alert('Error', 'Failed to send OTP. Please try again.');
     }
   };
-  
 
   return (
     <ImageBackground
@@ -81,8 +83,6 @@ const VerifyAccountScreen = ({ navigation }) => {
     </ImageBackground>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
