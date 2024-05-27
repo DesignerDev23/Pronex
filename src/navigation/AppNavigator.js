@@ -19,6 +19,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import PersonalDetailsScreen from '../screens/profile/PersonalDetailsScreen';
 import VerifyAccountScreen from '../screens/profile/VerifyAccountScreen';
 import VerifyOtpScreen from '../screens/profile/VerifyOtpScreen';
+import DoctorProfileScreen from '../screens/Doctor/DoctorProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ const AppNavigator = () => {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      <Stack.Screen name="DoctorProfile" component={DoctorProfileScreen} />
       {/* Add the screens for the tabs */}
       {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
       <Stack.Screen name="Doctors" component={DoctorsScreen} />

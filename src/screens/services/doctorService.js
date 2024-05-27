@@ -1,4 +1,3 @@
-// doctorService.js
 import axios from 'axios';
 
 const API_URL = 'https://pronex.abdulfortech.com/api/doctors';
@@ -9,6 +8,22 @@ const doctorService = {
       const options = {
         method: 'GET',
         url: API_URL,
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.request(options);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  fetchDoctorById: async (doctorID, token) => {
+    try {
+      const options = {
+        method: 'GET',
+        url: `${API_URL}/${doctorID}`,
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,

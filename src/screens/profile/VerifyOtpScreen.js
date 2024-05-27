@@ -5,8 +5,7 @@ import Loader from '../../components/Loader';
 import authService from '../services/authService';
 
 const VerifyOTPScreen = ({ route, navigation }) => {
-  const { userData } = route.params;
-  const { channel, contact } = route.params;
+  const { userData, channel, contact } = route.params;
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,8 +17,8 @@ const VerifyOTPScreen = ({ route, navigation }) => {
     try {
       const data = await authService.verifyOTP(channel, contact, otpCode);
       setLoading(false);
-      // If OTP verification is successful, navigate to the next screen
-      navigation.navigate('Profile', { userData: userDataResponse }); // Replace 'NextScreen' with the actual name of the screen
+      // If OTP verification is successful, navigate to the Profile screen
+      navigation.navigate('Profile', { userData });
     } catch (error) {
       console.error('OTP verification error:', error);
       setError(error);

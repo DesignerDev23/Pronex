@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import doctorService from '../screens/services/doctorService'; // Adjust the path if necessary
 
 const DoctorCard = ({ token }) => { // Assuming you are passing the token as a prop
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -23,7 +25,10 @@ const DoctorCard = ({ token }) => { // Assuming you are passing the token as a p
   }, [token]);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity 
+      style={styles.card}
+      onPress={() => navigation.navigate('DoctorProfile', { doctorID: item.doctorID })} // Navigate to the DoctorProfile screen with doctorID
+    >
       <View style={styles.leftContainer}>
         <View style={styles.profilePicture}>
           <FontAwesome5 name="user-md" size={24} color="#fff" />
@@ -85,11 +90,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   doctorName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontFamily: 'Montserrat',
   },
   specialization: {
-    fontSize: 14,
+    fontSize: 12,
+    fontFamily: 'poppins-regular',
     color: '#777',
   },
   phoneButton: {

@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
   seeAllText: {
     color: '#777',
     fontSize: 10,
+    fontFamily: 'poppins-regular',
     marginRight: 5,
   },
   seeAllIcon: {

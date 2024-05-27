@@ -18,7 +18,9 @@ const {width, height} = Dimensions.get('window');
 
 Font.loadAsync({
   'poppins-regular': require('../../../assets/fonts/Poppins-Regular.ttf'), // Update the path accordingly
+  'poppins-bold': require('../../../assets/fonts/Poppins-Bold.ttf'), // Update the path accordingly
   'Montserrat': require('../../../assets/fonts/Montserrat-Bold.ttf'), // Update the path accordingly
+  'Montserrat-Regular': require('../../../assets/fonts/Montserrat-Regular.ttf'), // Update the path accordingly
 });
 
 const COLORS = {
