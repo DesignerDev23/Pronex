@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 import doctorService from '../services/doctorService';
 import authService from '../services/authService';
+import ProgressBar from './ProgressBar';
 
 const BookAppointmentScreen = ({ route, navigation }) => {
   const { doctorID, doctor } = route.params;
@@ -17,7 +18,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
     duration: '30',
     date: '2024-12-12',
     start_time: '12:00',
-    end_time: '12:30',
+    end_time: '',
     address: 'Sample Address',
     contact: '09078732437',
     note: 'headache'
@@ -32,11 +33,31 @@ const BookAppointmentScreen = ({ route, navigation }) => {
   }, []);
 
   const handleInputChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    if (name === 'duration') {
+      // Calculate end time based on start time and selected duration
+      const startTime = formData.start_time.split(':');
+      const startHours = parseInt(startTime[0]);
+      const startMinutes = parseInt(startTime[1]);
+      const durationMinutes = parseInt(value);
+      const endMinutes = (startMinutes + durationMinutes) % 60;
+      const endHours = startHours + Math.floor((startMinutes + durationMinutes) / 60);
+      const endHoursFormatted = endHours < 10 ? `0${endHours}` : endHours.toString();
+      const endMinutesFormatted = endMinutes < 10 ? `0${endMinutes}` : endMinutes.toString();
+      const endTime = `${endHoursFormatted}:${endMinutesFormatted}`;
+      
+      setFormData({
+        ...formData,
+        [name]: value,
+        end_time: endTime
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
+  
 
   const handleNext = () => {
     setStep(step + 1);
@@ -68,6 +89,7 @@ const handleSubmit = async () => {
         <Text style={styles.headerTitle}>Schedule an Appointment</Text>
       </View>
       <DoctorCard doctor={doctor} />
+      <ProgressBar totalSteps={3} currentStep={step} />
       <Animatable.View animation="fadeIn" style={styles.step}>
         {step === 1 && (
           <Animatable.View key={step} animation="fadeInRight" style={styles.step}>

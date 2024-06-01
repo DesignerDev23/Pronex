@@ -105,6 +105,22 @@ const authService = {
       throw error;
     }
   },
+  getUserID: async () => {
+    try {
+      const userData = await AsyncStorage.getItem('userData');
+      if (!userData) {
+        throw new Error('No user data found');
+      }
+      const parsedUserData = JSON.parse(userData);
+      console.log('Parsed user data:', parsedUserData); // Debugging
+      console.log('User ID:', parsedUserData.userID); // Debugging
+      return parsedUserData.userID; // Assuming 'userID' is the user ID field
+    } catch (error) {
+      console.error('Error getting user ID:', error);
+      throw error;
+    }
+  },
+
   logout: async () => {
     try {
       const token = await AsyncStorage.getItem('authToken');

@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons, Octicons, AntDesign, FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import UpcomingAppointment from '../components/UpcomingAppointment';
 import DoctorCard from '../components/DoctorCard';
 import CustomBottomTabBar from '../components/CustomBottomTabBar';
 import HowCanWeHelpYou from '../components/HowCanWeHelpYou';
+import PopularCategories from '../components/PopularCategories';
 
 const HomeScreen = ({ route, navigation }) => {
   const { userData } = route.params;
@@ -14,7 +15,6 @@ const HomeScreen = ({ route, navigation }) => {
     // Navigate to the screen to see all appointments
     navigation.navigate('AllAppointments');
   };
-
 
   return (
     <View style={styles.container}>
@@ -46,32 +46,45 @@ const HomeScreen = ({ route, navigation }) => {
         <MaterialIcons name="search" size={24} color="#33363F" style={styles.searchIcon} />
         <FontAwesome5 name="sort-amount-down" size={24} color="#00B4FE" style={styles.filterIcon} />
       </View>
-      <View style={styles.appointmentContainer}>
-        <Text style={styles.upcomingText}>Upcomming Appointments</Text>
-        <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
-          <Text style={styles.seeAllText}>See all</Text>
-          <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
-        </TouchableOpacity>
-      </View>
-      <UpcomingAppointment />
-      <View style={styles.appointmentContainer}>
-        <Text style={styles.upcomingText}>Available Doctors</Text>
-        <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
-          <Text style={styles.seeAllText}>See all</Text>
-          <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.content}>
-      <DoctorCard />
-      </View>
-      <View style={styles.appointmentContainer}>
-        <Text style={styles.upcomingText}>How can we Help</Text>
-        <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
-          <Text style={styles.seeAllText}>See all</Text>
-          <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
-        </TouchableOpacity>
-      </View>
-      <HowCanWeHelpYou />
+      <ScrollView contentContainerStyle={styles.scrollViewContent}
+                   showsVerticalScrollIndicator={false}
+                   showsHorizontalScrollIndicator={false}
+      >
+        <View style={styles.appointmentContainer}>
+          <Text style={styles.upcomingText}>Upcoming Appointments</Text>
+          <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
+            <Text style={styles.seeAllText}>See all</Text>
+            <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
+          </TouchableOpacity>
+        </View>
+        <UpcomingAppointment />
+        <View style={styles.appointmentContainer}>
+          <Text style={styles.upcomingText}>Available Doctors</Text>
+          <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
+            <Text style={styles.seeAllText}>See all</Text>
+            <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.content}>
+          <DoctorCard />
+        </View>
+        <View style={styles.appointmentContainer}>
+          <Text style={styles.upcomingText}>How can we Help</Text>
+          <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
+            <Text style={styles.seeAllText}>See all</Text>
+            <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
+          </TouchableOpacity>
+        </View>
+        <HowCanWeHelpYou />
+        <View style={styles.appointmentContainer}>
+          <Text style={styles.upcomingText}>Popular Categories</Text>
+          <TouchableOpacity onPress={handleSeeAllAppointments} style={styles.seeAllContainer}>
+            <Text style={styles.seeAllText}>See all</Text>
+            <Entypo name="chevron-right" size={18} color="#777" style={styles.seeAllIcon} />
+          </TouchableOpacity>
+        </View>
+        <PopularCategories />
+      </ScrollView>
       <CustomBottomTabBar navigation={navigation} route={route} userDataResponse={userData} />
     </View>
   );
@@ -170,8 +183,16 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   content: {
-    // marginTop: '120%',
     paddingHorizontal: 10,
+  },
+  scrollViewContent: {
+    paddingBottom: 80, // Ensure there's enough space at the bottom of the scrollable content
+  },
+  bottomTabBar: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 40,
   },
 });
 
