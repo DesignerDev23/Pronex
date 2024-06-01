@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import doctorProfileImage from '../../assets/images/doctor.png';
 
 const UpcomingAppointment = () => {
   const upcomingAppointmentData = {
@@ -15,7 +16,10 @@ const UpcomingAppointment = () => {
       <View style={styles.card}>
         <View style={styles.leftContainer}>
           <View style={styles.backgroundCircle}>
-            <FontAwesome name="user-md" size={32} color="#fff" />
+          <Image
+            style={styles.profilePicture}
+            source={doctorProfileImage} // Use the imported image
+          />
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.doctorName}>{upcomingAppointmentData.doctorName}</Text>
@@ -67,6 +71,12 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  profilePicture: {
+    width: 55,
+    height: 55,
+    borderRadius: 40,
+    backgroundColor: '#fff',
   },
   textContainer: {
     marginLeft: 10,

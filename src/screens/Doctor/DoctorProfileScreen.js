@@ -5,6 +5,8 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import doctorService from '../../screens/services/doctorService';
 import doctorProfileImage from '../../../assets/images/doctor.png';
 
+
+
 const DoctorProfileScreen = ({ route, navigation }) => {
   const { doctorID } = route.params;
   const [doctor, setDoctor] = useState(null);
@@ -33,7 +35,7 @@ const DoctorProfileScreen = ({ route, navigation }) => {
   }, [doctorID, token]);
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#00B4FE" />;
+    return <ActivityIndicator size="large" color="#00B4FE" top="20"/>;
   }
 
   if (!doctor) {
@@ -68,12 +70,34 @@ const DoctorProfileScreen = ({ route, navigation }) => {
         ),
         expertise: () => (
           <View style={styles.scene}>
-            <Text>{doctor.expertise}</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>About Me</Text>
+              <Text style={styles.sectionContent}>As a dedicated cardiologist with {totalYearsOfExperience}+ years of experience, I am committed to providing compassionate and comprehensive care to patients with various cardiovascular conditions. My expertise lies in diagnosing, treating, and managing a wide range of heart-related ailments, ensuring optimal cardiac health and well-being for my patients.</Text>
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Education & Training</Text>
+              <Text style={styles.sectionContent}>I obtained my medical degree from [University/School], where I developed a passion for cardiology. Following medical school, I completed my residency in Internal Medicine, specializing in cardiology, at [Hospital/Institution]. I further honed my skills through fellowship training in Cardiology, focusing on [specific areas of interest or specialization].</Text>
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Clinical Approach</Text>
+              <Text style={styles.sectionContent}>My approach to patient care revolves around personalized treatment plans tailored to each individual's unique needs and circumstances. Through thorough evaluation, advanced diagnostic techniques, and evidence-based therapies, I strive to optimize cardiovascular health and improve overall quality of life for my patients.</Text>
+            </View>
           </View>
         ),
         review: () => (
           <View style={styles.scene}>
-            <Text>{doctor.reviews}</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>About Me</Text>
+              <Text style={styles.sectionContent}>As a dedicated cardiologist with {totalYearsOfExperience}+ years of experience, I am committed to providing compassionate and comprehensive care to patients with various cardiovascular conditions. My expertise lies in diagnosing, treating, and managing a wide range of heart-related ailments, ensuring optimal cardiac health and well-being for my patients.</Text>
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Education & Training</Text>
+              <Text style={styles.sectionContent}>I obtained my medical degree from [University/School], where I developed a passion for cardiology. Following medical school, I completed my residency in Internal Medicine, specializing in cardiology, at [Hospital/Institution]. I further honed my skills through fellowship training in Cardiology, focusing on [specific areas of interest or specialization].</Text>
+            </View>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Clinical Approach</Text>
+              <Text style={styles.sectionContent}>My approach to patient care revolves around personalized treatment plans tailored to each individual's unique needs and circumstances. Through thorough evaluation, advanced diagnostic techniques, and evidence-based therapies, I strive to optimize cardiovascular health and improve overall quality of life for my patients.</Text>
+            </View>
           </View>
         ),
       });
@@ -132,10 +156,16 @@ const DoctorProfileScreen = ({ route, navigation }) => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.bookButton}>
-          <Feather name="calendar" size={22} color="#ffffff" style={styles.bookIcon} />
-          <Text style={styles.bookButtonText}>Book Appointment</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.bookButton}
+        onPress={() => navigation.navigate('BookAppointment', { doctorID: doctorID, doctor })}
+      >
+        <Feather name="calendar" size={22} color="#ffffff" style={styles.bookIcon} />
+        <Text style={styles.bookButtonText}>Book Appointment</Text>
+      </TouchableOpacity>
+
+
+
         <TouchableOpacity style={styles.bookmarkButton}>
           <Feather name="bookmark" size={20} color="#00B4FE" />
         </TouchableOpacity>
@@ -165,6 +195,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     width: '100%',
+  },
+  backButton: {
+    marginRight: 10,
   },
   backButton: {
     marginRight: 10,

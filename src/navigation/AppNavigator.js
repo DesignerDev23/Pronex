@@ -20,6 +20,18 @@ import PersonalDetailsScreen from '../screens/profile/PersonalDetailsScreen';
 import VerifyAccountScreen from '../screens/profile/VerifyAccountScreen';
 import VerifyOtpScreen from '../screens/profile/VerifyOtpScreen';
 import DoctorProfileScreen from '../screens/Doctor/DoctorProfileScreen';
+import BookAppointmentScreen from '../screens/Doctor/BookAppointmentScreen';
+import AboutPronexHealth from '../screens/profile/AboutPronexHealth';
+import Feedback from '../screens/profile/Feedback';
+import HelpAndSupport from '../screens/profile/HelpAndSupport';
+import MedicalRecords from '../screens/profile/MedicalRecords';
+import MyAppointments from '../screens/profile/MyAppointments';
+import PaymentMethods from '../screens/profile/PaymentMethods';
+import PrivacyPolicy from '../screens/profile/PrivacyPolicy';
+import SavedItems from '../screens/profile/SavedItems';
+import SystemSetting from '../screens/profile/SystemSetting';
+import TermsAndCondition from '../screens/profile/TermsAndCondition';
+
 
 const Stack = createStackNavigator();
 
@@ -35,6 +47,7 @@ const AppNavigator = () => {
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
       <Stack.Screen name="DoctorProfile" component={DoctorProfileScreen} />
+      <Stack.Screen name="BookAppointment" component={BookAppointmentScreen} />
       {/* Add the screens for the tabs */}
       {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
       <Stack.Screen name="Doctors" component={DoctorsScreen} />
@@ -44,6 +57,16 @@ const AppNavigator = () => {
       <Stack.Screen name="PersonalDetails" component={PersonalDetailsScreen} />
       <Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
       <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+      <Stack.Screen name="AboutPronexHealth" component={AboutPronexHealth} />
+      <Stack.Screen name="FeedBack" component={Feedback} />
+      <Stack.Screen name="HelpAndSupport" component={HelpAndSupport} />
+      <Stack.Screen name="MedicalRecords" component={MedicalRecords} />
+      <Stack.Screen name="MyAppointments" component={MyAppointments} />
+      <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Stack.Screen name="SavedItems" component={SavedItems} />
+      <Stack.Screen name="SystemSetting" component={SystemSetting} />
+      <Stack.Screen name="TermsAndCondition" component={TermsAndCondition} />
     </Stack.Navigator>
   );
 };
