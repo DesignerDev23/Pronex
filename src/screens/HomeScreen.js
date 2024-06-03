@@ -183,16 +183,16 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   content: {
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
   },
   scrollViewContent: {
-    paddingBottom: 80, // Ensure there's enough space at the bottom of the scrollable content
+    // paddingBottom: 80, // Ensure there's enough space at the bottom of the scrollable content
   },
   bottomTabBar: {
-    position: 'absolute',
+    position: 'fixed',
     left: 0,
+    width: 30,
     right: 0,
-    bottom: 40,
   },
 });
 

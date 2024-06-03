@@ -1,29 +1,85 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import authService from '../screens/services/authService';
+import axios from 'axios';
 import doctorProfileImage from '../../assets/images/doctor.png';
 
 const UpcomingAppointment = () => {
-  const upcomingAppointmentData = {
-    doctorName: 'Dr. John Doe',
-    specialty: 'Cardiologist',
-    appointmentDate: 'April 30, 2024',
-    appointmentTime: '10:00 AM',
-  };
+  const [appointmentData, setAppointmentData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAppointmentData = async () => {
+      try {
+        const token = await authService.getToken();
+        const userID = await authService.getUserID(); // Fetching the user ID
+        if (!token) {
+          throw new Error('No authentication token found');
+        }
+
+        const options = {
+          method: 'GET',
+          url: `https://pronex.abdulfortech.com/api/consultations/active?userID=${userID}`, // Using the user ID in the API request
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const { data } = await axios.request(options);
+        setAppointmentData(data);
+        
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointmentData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#00B4FE" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Error fetching appointment data</Text>
+      </View>
+    );
+  }
+
+  if (!appointmentData) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>No upcoming appointments</Text>
+      </View>
+    );
+  }
+
+  const { username, speciality, appointmentDate, appointmentTime } = appointmentData;
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.leftContainer}>
           <View style={styles.backgroundCircle}>
-          <Image
-            style={styles.profilePicture}
-            source={doctorProfileImage} // Use the imported image
-          />
+            <Image
+              style={styles.profilePicture}
+              source={doctorProfileImage}
+            />
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.doctorName}>{upcomingAppointmentData.doctorName}</Text>
-            <Text style={styles.specialty}>{upcomingAppointmentData.specialty}</Text>
+            <Text style={styles.doctorName}>{username}</Text>
+            <Text style={styles.specialty}>{speciality}</Text>
           </View>
         </View>
         <View style={styles.rightContainer}>
@@ -33,12 +89,12 @@ const UpcomingAppointment = () => {
         </View>
       </View>
       <View style={styles.dateTimeContainer}>
-            <FontAwesome name="calendar" size={18} color="#00B4FE" style={styles.icon} />
-            <Text style={styles.appointmentDateTime}>{upcomingAppointmentData.appointmentDate}</Text>
-            <View style={styles.lineSeparator}></View>
-            <FontAwesome name="clock-o" size={18} color="#00B4FE" style={styles.icon} />
-            <Text style={styles.appointmentDateTime}>{upcomingAppointmentData.appointmentTime}</Text>
-          </View>
+        <FontAwesome name="calendar" size={18} color="#00B4FE" style={styles.icon} />
+        <Text style={styles.appointmentDateTime}>{appointmentDate}</Text>
+        <View style={styles.lineSeparator}></View>
+        <FontAwesome name="clock-o" size={18} color="#00B4FE" style={styles.icon} />
+        <Text style={styles.appointmentDateTime}>{appointmentTime}</Text>
+      </View>
     </View>
   );
 };
@@ -57,7 +113,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginLeft: 10,
     marginBottom: 10,
-    height: 160, // Adjust the height as needed
+    height: 160,
   },
   leftContainer: {
     flexDirection: 'row',
@@ -83,7 +139,6 @@ const styles = StyleSheet.create({
   },
   doctorName: {
     fontSize: 16,
-    // fontWeight: 'bold',
     color: '#fff',
     fontFamily: 'Montserrat',
   },
@@ -103,7 +158,6 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 10,
   },
-  
   dateTimeContainer: {
     flexDirection: 'row',
     marginTop: -70,
@@ -127,6 +181,12 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#ccc',
     marginHorizontal: 10,
+  },
+  errorText: {
+    fontSize: 13,
+    color: '#ddd',
+    fontFamily: 'Montserrat',
+    textAlign: 'center',
   },
 });
 

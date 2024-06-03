@@ -105,16 +105,21 @@ const authService = {
       throw error;
     }
   },
+
   getUserID: async () => {
     try {
       const userData = await AsyncStorage.getItem('userData');
+      console.log('Raw user data from AsyncStorage:', userData); // Debugging
       if (!userData) {
         throw new Error('No user data found');
       }
       const parsedUserData = JSON.parse(userData);
       console.log('Parsed user data:', parsedUserData); // Debugging
-      console.log('User ID:', parsedUserData.userID); // Debugging
-      return parsedUserData.userID; // Assuming 'userID' is the user ID field
+      if (!parsedUserData.data || !parsedUserData.data.userID) {
+        throw new Error('User ID not found in user data');
+      }
+      console.log('User ID:', parsedUserData.data.userID); // Debugging
+      return parsedUserData.data.userID; // Adjusted to access nested userID
     } catch (error) {
       console.error('Error getting user ID:', error);
       throw error;

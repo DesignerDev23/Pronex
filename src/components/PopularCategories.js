@@ -24,10 +24,6 @@ const PopularCategories = () => {
         <Image source={require('../../assets/icons/the.png')} style={styles.image} />
         <Text style={styles.title}>Therapy</Text>
       </View>
-      <View style={styles.itemContainer}>
-        <Image source={require('../../assets/icons/Nurse.png')} style={styles.image} />
-        <Text style={styles.title}>Healthcare Tips</Text>
-      </View>
     </ScrollView>
   );
 };

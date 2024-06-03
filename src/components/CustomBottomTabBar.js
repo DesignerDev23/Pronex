@@ -9,10 +9,11 @@ const CustomBottomTabBar = ({ navigation, route, userDataResponse }) => {
 
   return (
     <View style={[styles.container, { bottom: 0 }]}>
-      <TouchableOpacity onPress={() => navigateToScreen('HomeScreen')} style={styles.tab}>
-        <Image source={require('../../assets/icons/home.png')} style={styles.icon} />
-        <Text style={styles.tabText}>Home</Text>
-      </TouchableOpacity>
+<TouchableOpacity onPress={() => navigation.navigate('HomeScreen', { userData: userDataResponse })} style={styles.tab}>
+  <Image source={require('../../assets/icons/home.png')} style={styles.icon} />
+  <Text style={styles.tabText}>Home</Text>
+</TouchableOpacity>
+
       <TouchableOpacity onPress={() => navigateToScreen('Doctors')} style={styles.tab}>
         <Image source={require('../../assets/icons/doctor.png')} style={styles.icon} />
         <Text style={styles.tabText}>Doctors</Text>
