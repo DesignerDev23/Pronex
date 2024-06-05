@@ -1,24 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const HowCanWeHelpYou = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      {/* Find a Doctor */}
-      <View style={styles.itemContainer}>
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => navigation.navigate('FindDoctor')}
+      >
         <Image source={require('../../assets/icons/Nurse.png')} style={styles.image} />
         <Text style={styles.title}>Find a Doctor</Text>
-      </View>
-      {/* Buy Medication */}
-      <View style={styles.itemContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => navigation.navigate('BuyMedication')}
+      >
         <Image source={require('../../assets/icons/medication.png')} style={styles.image} />
         <Text style={styles.title}>Buy Medication</Text>
-      </View>
-      {/* Lab Test */}
-      <View style={styles.itemContainer}>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => navigation.navigate('LabTest')}
+      >
         <Image source={require('../../assets/icons/lab.png')} style={styles.image} />
         <Text style={styles.title}>Lab Test</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -48,6 +59,26 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#333',
     fontFamily: 'poppins-regular',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+    alignItems: 'center',
+  },
+  searchInput: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 180, 254, 0.2)',
+    borderRadius: 14,
+    paddingHorizontal: 42,
+    fontStyle: 'italic',
+    marginRight: 10,
+    height: 35,
+  },
+  searchIcon: {
+    position: 'absolute',
+    left: 30,
+    top: 6,
   },
 });
 

@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 13,
+    fontFamily: 'poppins-regular',
     borderRadius: 15,
   },
   checkboxContainer: {

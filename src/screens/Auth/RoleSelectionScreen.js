@@ -12,7 +12,7 @@ Font.loadAsync({
 const RoleSelectionScreen = ({ navigation }) => {
   const handleRoleSelect = (role) => {
     // Navigate to the appropriate signup screen based on the selected role
-    navigation.navigate('Signup', { role });
+    navigation.navigate('Login', { role });
   };
 
   return (

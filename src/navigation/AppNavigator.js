@@ -31,6 +31,9 @@ import PrivacyPolicy from '../screens/profile/PrivacyPolicy';
 import SavedItems from '../screens/profile/SavedItems';
 import SystemSetting from '../screens/profile/SystemSetting';
 import TermsAndCondition from '../screens/profile/TermsAndCondition';
+import FindDoctorScreen from '../screens/FindDoctorScreen';
+import LabTestScreen from '../screens/LabTestScreen';
+import BuyMedicationScreen from '../screens/BuyMedicationScreen';
 
 
 const Stack = createStackNavigator();
@@ -67,6 +70,9 @@ const AppNavigator = () => {
       <Stack.Screen name="SavedItems" component={SavedItems} />
       <Stack.Screen name="SystemSetting" component={SystemSetting} />
       <Stack.Screen name="TermsAndCondition" component={TermsAndCondition} />
+      <Stack.Screen name="FindDoctor" component={FindDoctorScreen} />
+      <Stack.Screen name="LabTest" component={LabTestScreen} />
+      <Stack.Screen name="BuyMedication" component={BuyMedicationScreen} />
     </Stack.Navigator>
   );
 };
