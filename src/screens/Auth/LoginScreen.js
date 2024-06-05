@@ -143,7 +143,12 @@ const LoginScreen = ({ navigation }) => {
             <MaterialCommunityIcons name="fingerprint" size={24} color="#00B4FE" />
             <Text style={styles.fingerprintText}>Sign in with fingerprint</Text>
           </TouchableOpacity>
-        </View>
+
+          <TouchableOpacity style={styles.createAccountButton} onPress={() => navigation.navigate('SignupScreen')}>
+            <Text style={styles.createAccountText}>Create an Account</Text>
+          </TouchableOpacity>
+
+                  </View>
       </View>
     </ImageBackground>
     
