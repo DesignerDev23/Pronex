@@ -14,9 +14,10 @@ const ProfileScreen = ({ route, navigation }) => {
     try {
       await authService.logout();
       // Alert.alert('Logout', 'You have been logged out successfully.');
+      const role = await authService.getUserRole();
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Login' }],
+        routes: [{ name: 'Login', params: { role: role } }],
       });
     } catch (error) {
       console.error('Logout error', error);

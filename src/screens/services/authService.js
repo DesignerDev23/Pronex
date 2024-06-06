@@ -105,7 +105,22 @@ const authService = {
       throw error;
     }
   },
-
+  getUserRole: async () => {
+    try {
+      const userData = await AsyncStorage.getItem('userData');
+      if (!userData) {
+        throw new Error('No user data found');
+      }
+      const parsedUserData = JSON.parse(userData);
+      if (!parsedUserData.data || !parsedUserData.data.role) {
+        throw new Error('User role not found in user data');
+      }
+      return parsedUserData.data.role; // Adjusted to access the nested role
+    } catch (error) {
+      console.error('Error getting user role:', error);
+      throw error;
+    }
+  },
   getUserID: async () => {
     try {
       const userData = await AsyncStorage.getItem('userData');
@@ -216,5 +231,7 @@ const authService = {
     }
   },
 };
+
+
 
 export default authService;

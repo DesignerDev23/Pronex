@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; // Import MaterialCommunityIcons from expo/vector-icons
-import { AntDesign } from '@expo/vector-icons'; // Import AntDesign from expo/vector-icons
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Alert } from 'react-native';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import authService from '../services/authService';
 import * as LocalAuthentication from 'expo-local-authentication';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../../components/Loader';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
+  const { role } = route.params;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [emailValid, setEmailValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
 
   useEffect(() => {
     checkLoggedInStatus();
@@ -20,14 +20,9 @@ const LoginScreen = ({ navigation }) => {
 
   const checkLoggedInStatus = async () => {
     try {
-      // Check if a token exists in AsyncStorage
       const token = await authService.getToken();
       if (token) {
-        // Fetch user data using the stored token
         const userData = await authService.getUserData(token);
-        // Navigate to the home screen with user data
-
-        
         navigation.replace('HomeScreen', { userData });
       }
     } catch (error) {
@@ -36,20 +31,34 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const handleSignIn = async () => {
+    // Validate email and password fields
+    if (email === '') {
+      setEmailValid(false);
+    } else {
+      setEmailValid(true);
+    }
+    
+    if (password === '') {
+      setPasswordValid(false);
+    } else {
+      setPasswordValid(true);
+    }
+
+    if (email === '' || password === '') {
+      return; // Exit if validation fails
+    }
+
     setLoading(true); // Show loader
     try {
       const userData = { email, password };
       const response = await authService.signIn(userData);
-      const { token } = response; // Extract the token from the response
-  
-      // Fetch user data using the obtained token
+      const { token } = response;
+
       const userDataResponse = await authService.getUserData(token);
-  
-      // Store the token and user data in the session
+
       await authService.storeToken(token);
       await authService.storeUserData(userDataResponse);
-  
-      // Navigate to the home screen with user data
+
       navigation.replace('HomeScreen', { userData: userDataResponse });
     } catch (error) {
       console.error(error);
@@ -58,14 +67,11 @@ const LoginScreen = ({ navigation }) => {
       setLoading(false); // Hide loader
     }
   };
-  
-  
 
   const authenticateWithFingerprint = async () => {
     try {
       const result = await LocalAuthentication.authenticateAsync();
       if (result.success) {
-        // Authentication successful, proceed with login
         handleSignIn();
       } else {
         console.log('Authentication failed');
@@ -77,33 +83,35 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/images/bg.png')} // Replace 'bg.png' with your background image path
+      source={require('../../../assets/images/bg.png')}
       style={styles.backgroundImage}
     >
       <View style={styles.container}>
-      {loading && <Loader />}
+        {loading && <Loader />}
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <MaterialIcons name="arrow-back-ios" size={20} color="#fff" style={{marginLeft: 5,}} />
+          <MaterialIcons name="arrow-back-ios" size={20} color="#fff" style={{marginLeft: 5}} />
         </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Text style={styles.heading}>Welcome Back !!</Text>
           <Text style={styles.subheading}>Sign in back to your account and access expert healthcare services instantly.</Text>
         </View>
         <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
+          <View style={[styles.inputContainer, !emailValid && styles.invalidInput]}>
             <MaterialCommunityIcons name="email-outline" size={24} color="#00B4FE" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Email"
               onChangeText={(text) => setEmail(text)}
+              value={email}
             />
           </View>
-          <View style={styles.inputContainer}>
+          <View style={[styles.inputContainer, !passwordValid && styles.invalidInput]}>
             <MaterialCommunityIcons name="lock-outline" size={24} color="#00B4FE" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Password"
               onChangeText={(text) => setPassword(text)}
+              value={password}
               secureTextEntry
             />
           </View>
@@ -144,14 +152,12 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.fingerprintText}>Sign in with fingerprint</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.createAccountButton} onPress={() => navigation.navigate('SignupScreen')}>
+          <TouchableOpacity style={styles.createAccountButton} onPress={() => navigation.navigate('Signup', { role })}>
             <Text style={styles.createAccountText}>Create an Account</Text>
           </TouchableOpacity>
-
-                  </View>
+        </View>
       </View>
     </ImageBackground>
-    
   );
 };
 
@@ -173,7 +179,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 10,
     left: 20,
-    // backgroundColor: 'rgba(0, 255, 254, 0.19)',
     borderRadius: 10,
     padding: 4,
     zIndex: 1,
@@ -189,6 +194,15 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginTop: '60%',
     marginBottom: 10,
+  },
+  createAccountButton: {
+    bottom: -60,
+    alignSelf: 'center',
+  },
+  createAccountText: {
+    color: '#00B4FE',
+    fontFamily: 'poppins-regular',
+    fontSize: 16,
   },
   subheading: {
     fontSize: 15,
@@ -213,6 +227,9 @@ const styles = StyleSheet.create({
     borderColor: '#00B4FE',
     borderWidth: 1,
     borderRadius: 15,
+  },
+  invalidInput: {
+    borderColor: 'red',
   },
   icon: {
     marginLeft: 10,
@@ -254,32 +271,31 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontFamily: 'poppins-regular',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
   },
   separatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginVertical: 10,
   },
   separatorLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#00B4FE',
-    marginHorizontal: 10,
+    backgroundColor: '#ccc',
   },
   separatorText: {
-    fontSize: 12,
-    color: '#00B4FE',
+    marginHorizontal: 10,
+    color: '#999',
     fontFamily: 'poppins-regular',
   },
   socialContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
+    justifyContent: 'center',
+    marginBottom: 20,
+    gap: 20,
   },
   socialButton: {
-    width: 100,
+    width: 90,
     height: 50,
     backgroundColor: '#fff',
     borderWidth: 1,
@@ -292,11 +308,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
+    marginVertical: 10,
   },
   fingerprintText: {
     marginLeft: 10,
-    color: '#000',
+    color: '#00B4FE',
     fontFamily: 'poppins-regular',
   },
 });

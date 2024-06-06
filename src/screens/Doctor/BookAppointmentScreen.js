@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import DoctorCard from './DoctorCard';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -7,11 +7,13 @@ import { Picker } from '@react-native-picker/picker';
 import doctorService from '../services/doctorService';
 import authService from '../services/authService';
 import ProgressBar from './ProgressBar';
+import { PaystackWebView } from 'react-native-paystack-webview';
 
 const BookAppointmentScreen = ({ route, navigation }) => {
   const { doctorID, doctor } = route.params;
   const [step, setStep] = useState(1);
   const [token, setToken] = useState('');
+  const [paymentData, setPaymentData] = useState(null); // State for Paystack payment data
   const [formData, setFormData] = useState({
     doctorID: doctorID,
     type: 'in-person',
@@ -57,7 +59,6 @@ const BookAppointmentScreen = ({ route, navigation }) => {
       });
     }
   };
-  
 
   const handleNext = () => {
     setStep(step + 1);
@@ -66,19 +67,57 @@ const BookAppointmentScreen = ({ route, navigation }) => {
   const handleBack = () => {
     setStep(step - 1);
   };
-const handleSubmit = async () => {
-  try {
-    console.log('Submitting form data:', formData);
-    const data = await doctorService.addConsultation(formData, token);
-    console.log('Consultation added successfully:', data);
-    // Handle successful submission, e.g., navigate to confirmation screen
-    navigation.navigate('AppointmentConfirmation', { consultationData: data });
-  } catch (error) {
-    console.error('Error submitting form:', error.response ? error.response.data : error.message);
-    // Handle error (show an alert or some UI feedback)
-  }
-};
 
+  const handlePaymentSuccess = async (reference) => {
+    try {
+      const userID = await authService.getUserId();
+      const options = {
+        method: 'POST',
+        url: 'https://pronex.abdulfortech.com/api/payments/verify',
+        headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+        data: {reference, type: formData.type, id: userID}
+      };
+      const { data } = await axios.request(options);
+      console.log('Payment verified:', data);
+      await handleSubmit();
+    } catch (error) {
+      console.error('Error verifying payment:', error);
+      Alert.alert('Payment Verification Error', 'There was an issue verifying your payment. Please try again.');
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      console.log('Submitting form data:', formData);
+      const data = await doctorService.addConsultation(formData, token);
+      console.log('Consultation added successfully:', data);
+      // Handle successful submission, e.g., navigate to confirmation screen
+      navigation.navigate('AppointmentConfirmation', { consultationData: data });
+    } catch (error) {
+      console.error('Error submitting form:', error.response ? error.response.data : error.message);
+      // Handle error (show an alert or some UI feedback)
+    }
+  };
+
+  const handlePayment = () => {
+    let amount = 0;
+    switch (formData.duration) {
+      case '15':
+        amount = 2500;
+        break;
+      case '30':
+        amount = 5000;
+        break;
+      case '60':
+        amount = 10000;
+        break;
+    }
+    setPaymentData({
+      amount: amount * 100, // Convert to kobo
+      reference: `${Math.floor(Math.random() * 1000000000 + 1)}`,
+      email: 'user@example.com' // Replace with the actual user email from authService or user data
+    });
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -116,7 +155,6 @@ const handleSubmit = async () => {
                 <Picker.Item label="60 minutes" value="60" />
               </Picker>
             </View>
-
             <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
               <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
@@ -181,13 +219,30 @@ const handleSubmit = async () => {
               <TouchableOpacity style={styles.backButton} onPress={handleBack}>
                 <Text style={styles.buttonText}>Back</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+              <TouchableOpacity style={styles.submitButton} onPress={handlePayment}>
                 <Text style={styles.buttonText}>Submit</Text>
               </TouchableOpacity>
             </View>
           </Animatable.View>
         )}
       </Animatable.View>
+      {paymentData && (
+        <PaystackWebView
+          paystackKey="pk_test_6a4375f68e24d391789c7e86187e15deb4829789" // Replace with your Paystack public key
+          amount={paymentData.amount}
+          billingEmail={paymentData.email}
+          activityIndicatorColor="green"
+          onSuccess={(res) => {
+            console.log('Payment success:', res);
+            handlePaymentSuccess(res.data.transactionRef.reference);
+          }}
+          onCancel={(e) => {
+            console.log('Payment cancelled:', e);
+            Alert.alert('Payment Cancelled', 'You have cancelled the payment.');
+          }}
+          autoStart={true}
+        />
+      )}
     </ScrollView>
   );
 };
