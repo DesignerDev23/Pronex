@@ -7,23 +7,22 @@ import { Picker } from '@react-native-picker/picker';
 import doctorService from '../services/doctorService';
 import authService from '../services/authService';
 import ProgressBar from './ProgressBar';
-import { PaystackWebView } from 'react-native-paystack-webview';
+import axios from 'axios';
 
-const BookAppointmentScreen = ({ route, navigation }) => {
+const BookAppointmentScreen = ({ route, navigation, userDataResponse}) => {
   const { doctorID, doctor } = route.params;
   const [step, setStep] = useState(1);
   const [token, setToken] = useState('');
-  const [paymentData, setPaymentData] = useState(null); // State for Paystack payment data
   const [formData, setFormData] = useState({
     doctorID: doctorID,
     type: 'in-person',
-    duration: '30',
-    date: '2024-12-12',
-    start_time: '12:00',
+    duration: '',
+    date: '',
+    start_time: '',
     end_time: '',
-    address: 'Sample Address',
-    contact: '09078732437',
-    note: 'headache'
+    address: '',
+    contact: '',
+    note: ''
   });
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const BookAppointmentScreen = ({ route, navigation }) => {
 
   const handleInputChange = (name, value) => {
     if (name === 'duration') {
-      // Calculate end time based on start time and selected duration
       const startTime = formData.start_time.split(':');
       const startHours = parseInt(startTime[0]);
       const startMinutes = parseInt(startTime[1]);
@@ -46,7 +44,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
       const endHoursFormatted = endHours < 10 ? `0${endHours}` : endHours.toString();
       const endMinutesFormatted = endMinutes < 10 ? `0${endMinutes}` : endMinutes.toString();
       const endTime = `${endHoursFormatted}:${endMinutesFormatted}`;
-      
+
       setFormData({
         ...formData,
         [name]: value,
@@ -68,55 +66,16 @@ const BookAppointmentScreen = ({ route, navigation }) => {
     setStep(step - 1);
   };
 
-  const handlePaymentSuccess = async (reference) => {
-    try {
-      const userID = await authService.getUserId();
-      const options = {
-        method: 'POST',
-        url: 'https://pronex.abdulfortech.com/api/payments/verify',
-        headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-        data: {reference, type: formData.type, id: userID}
-      };
-      const { data } = await axios.request(options);
-      console.log('Payment verified:', data);
-      await handleSubmit();
-    } catch (error) {
-      console.error('Error verifying payment:', error);
-      Alert.alert('Payment Verification Error', 'There was an issue verifying your payment. Please try again.');
-    }
-  };
-
   const handleSubmit = async () => {
     try {
       console.log('Submitting form data:', formData);
       const data = await doctorService.addConsultation(formData, token);
       console.log('Consultation added successfully:', data);
-      // Handle successful submission, e.g., navigate to confirmation screen
-      navigation.navigate('AppointmentConfirmation', { consultationData: data });
+      navigation.navigate('HomeScreen', { userData: userDataResponse  });
     } catch (error) {
       console.error('Error submitting form:', error.response ? error.response.data : error.message);
-      // Handle error (show an alert or some UI feedback)
+      Alert.alert('Error', 'There was an issue submitting the form. Please try again.');
     }
-  };
-
-  const handlePayment = () => {
-    let amount = 0;
-    switch (formData.duration) {
-      case '15':
-        amount = 2500;
-        break;
-      case '30':
-        amount = 5000;
-        break;
-      case '60':
-        amount = 10000;
-        break;
-    }
-    setPaymentData({
-      amount: amount * 100, // Convert to kobo
-      reference: `${Math.floor(Math.random() * 1000000000 + 1)}`,
-      email: 'user@example.com' // Replace with the actual user email from authService or user data
-    });
   };
 
   return (
@@ -150,6 +109,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
                 onValueChange={(value) => handleInputChange('duration', value)}
                 style={styles.picker}
               >
+                <Picker.Item label="Select Duration" value="" />
                 <Picker.Item label="15 minutes" value="15" />
                 <Picker.Item label="30 minutes" value="30" />
                 <Picker.Item label="60 minutes" value="60" />
@@ -180,8 +140,8 @@ const BookAppointmentScreen = ({ route, navigation }) => {
             <TextInput
               style={styles.input}
               value={formData.end_time}
-              onChangeText={(value) => handleInputChange('end_time', value)}
               placeholder="HH:MM"
+              editable={false}
             />
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.backButton} onPress={handleBack}>
@@ -219,30 +179,13 @@ const BookAppointmentScreen = ({ route, navigation }) => {
               <TouchableOpacity style={styles.backButton} onPress={handleBack}>
                 <Text style={styles.buttonText}>Back</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.submitButton} onPress={handlePayment}>
+              <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Submit</Text>
               </TouchableOpacity>
             </View>
           </Animatable.View>
         )}
       </Animatable.View>
-      {paymentData && (
-        <PaystackWebView
-          paystackKey="pk_test_6a4375f68e24d391789c7e86187e15deb4829789" // Replace with your Paystack public key
-          amount={paymentData.amount}
-          billingEmail={paymentData.email}
-          activityIndicatorColor="green"
-          onSuccess={(res) => {
-            console.log('Payment success:', res);
-            handlePaymentSuccess(res.data.transactionRef.reference);
-          }}
-          onCancel={(e) => {
-            console.log('Payment cancelled:', e);
-            Alert.alert('Payment Cancelled', 'You have cancelled the payment.');
-          }}
-          autoStart={true}
-        />
-      )}
     </ScrollView>
   );
 };

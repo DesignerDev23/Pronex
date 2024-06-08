@@ -14,14 +14,14 @@ const UpcomingAppointment = () => {
     const fetchAppointmentData = async () => {
       try {
         const token = await authService.getToken();
-        const userID = await authService.getUserID(); // Fetching the user ID
+        const userID = await authService.getUserID();
         if (!token) {
           throw new Error('No authentication token found');
         }
 
         const options = {
           method: 'GET',
-          url: `https://pronex.abdulfortech.com/api/consultations/active?userID=${userID}`, // Using the user ID in the API request
+          url: `https://pronex.abdulfortech.com/api/consultations/active?userID=${userID}`,
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ const UpcomingAppointment = () => {
         };
 
         const { data } = await axios.request(options);
-        setAppointmentData(data);
+        setAppointmentData(data.data); // Adjusted to access the nested data object
         
       } catch (error) {
         setError(error);
@@ -65,7 +65,8 @@ const UpcomingAppointment = () => {
     );
   }
 
-  const { username, speciality, appointmentDate, appointmentTime } = appointmentData;
+  const { doctor, date, start_time } = appointmentData;
+  const { firstName, specialization } = doctor;
 
   return (
     <View style={styles.container}>
@@ -78,8 +79,8 @@ const UpcomingAppointment = () => {
             />
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.doctorName}>{username}</Text>
-            <Text style={styles.specialty}>{speciality}</Text>
+            <Text style={styles.doctorName}>{firstName}</Text>
+            <Text style={styles.specialty}>{specialization}</Text>
           </View>
         </View>
         <View style={styles.rightContainer}>
@@ -90,10 +91,10 @@ const UpcomingAppointment = () => {
       </View>
       <View style={styles.dateTimeContainer}>
         <FontAwesome name="calendar" size={18} color="#00B4FE" style={styles.icon} />
-        <Text style={styles.appointmentDateTime}>{appointmentDate}</Text>
+        <Text style={styles.appointmentDateTime}>{date}</Text>
         <View style={styles.lineSeparator}></View>
         <FontAwesome name="clock-o" size={18} color="#00B4FE" style={styles.icon} />
-        <Text style={styles.appointmentDateTime}>{appointmentTime}</Text>
+        <Text style={styles.appointmentDateTime}>{start_time}</Text>
       </View>
     </View>
   );

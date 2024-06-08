@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.designer.dev23.pronex"
     },
     "web": {
       "favicon": "./assets/favicon.png"

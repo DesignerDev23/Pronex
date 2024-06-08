@@ -22,6 +22,7 @@ import VerifyOtpScreen from '../screens/profile/VerifyOtpScreen';
 import DoctorProfileScreen from '../screens/Doctor/DoctorProfileScreen';
 import BookAppointmentScreen from '../screens/Doctor/BookAppointmentScreen';
 import AboutPronexHealth from '../screens/profile/AboutPronexHealth';
+import MyOrders from '../screens/profile/MyOrders';
 import Feedback from '../screens/profile/Feedback';
 import HelpAndSupport from '../screens/profile/HelpAndSupport';
 import MedicalRecords from '../screens/profile/MedicalRecords';
@@ -34,6 +35,7 @@ import TermsAndCondition from '../screens/profile/TermsAndCondition';
 import FindDoctorScreen from '../screens/FindDoctorScreen';
 import LabTestScreen from '../screens/LabTestScreen';
 import BuyMedicationScreen from '../screens/BuyMedicationScreen';
+
 
 
 const Stack = createStackNavigator();
@@ -61,6 +63,7 @@ const AppNavigator = () => {
       <Stack.Screen name="VerifyAccount" component={VerifyAccountScreen} />
       <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
       <Stack.Screen name="AboutPronexHealth" component={AboutPronexHealth} />
+      <Stack.Screen name="MyOrders" component={MyOrders} />
       <Stack.Screen name="FeedBack" component={Feedback} />
       <Stack.Screen name="HelpAndSupport" component={HelpAndSupport} />
       <Stack.Screen name="MedicalRecords" component={MedicalRecords} />

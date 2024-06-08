@@ -54,7 +54,7 @@ const ProfileScreen = ({ route, navigation }) => {
             </TouchableOpacity>
 
 
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('PaymentMethods')}>
               <View style={styles.iconContainer}>
                 <MaterialIcons name="payment" size={24} color="#00B4FE" />
               </View>
@@ -62,7 +62,7 @@ const ProfileScreen = ({ route, navigation }) => {
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('MedicalRecords')}>
               <View style={styles.iconContainer}>
                 <FontAwesome5 name="clipboard-list" size={24} color="#00B4FE" />
               </View>
@@ -70,7 +70,7 @@ const ProfileScreen = ({ route, navigation }) => {
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('MyAppointments')}>
               <View style={styles.iconContainer}>
                 <FontAwesome5 name="calendar-week" size={24} color="#00B4FE" />
               </View>
@@ -78,7 +78,7 @@ const ProfileScreen = ({ route, navigation }) => {
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('MyOrders')}>
               <View style={styles.iconContainer}>
                 <MaterialCommunityIcons name="cart" size={24} color="#00B4FE" />
               </View>
@@ -89,21 +89,21 @@ const ProfileScreen = ({ route, navigation }) => {
 
           {/* Group 2: Saved Items - System Setting */}
           <View style={styles.groupContainer}>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('SavedItems')}>
               <View style={styles.iconContainer}>
                 <MaterialCommunityIcons name="bookmark" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Saved Items</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('HelpAndSupport')}>
               <View style={styles.iconContainer}>
                 <MaterialCommunityIcons name="face-agent" size={24} color="#00B4FE" />
               </View>
               <Text style={styles.title}>Help and Support</Text>
               <MaterialCommunityIcons name="arrow-right" size={24} color="#00B4FE" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('ScreenName')}>
+            <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('SystemSetting')}>
               <View style={styles.iconContainer}>
                 <Ionicons name="settings" size={24} color="#00B4FE" />
               </View>
